@@ -1,0 +1,63 @@
+Xft.antialias: true
+Xft.rgba:      rgb
+Xft.hinting:   true
+Xft.hintstyle: hintslight
+URxvt.foreground: white
+URxvt.background: rgb:26/26/26 
+
+URxvt.font: xft:Source Code Pro:size=12:antialias=true:hinting=true,xft:FontAwesome:fontformat=truetype:size=10
+URxvt.boldFont: xft:Source Code Pro:size=12:antialias=true:hinting=true
+
+URxvt.loginShell: True
+URxvt.scrollBar: False
+URxvt.url-launcher: google-chrome-stable
+
+URxvt.highlightColor: rgb:66/66/66
+
+URxvt.transparent: True
+URxvt.shading: 7
+URxvt.internalBorder: 3
+
+URxvt.urlLauncher: google-chrome-stable
+URxvt.matcher.button: 1
+
+#define base00 #000000
+#define base01 #303030
+#define base02 #505050
+#define base03 #b0b0b0
+#define base04 #d0d0d0
+#define base05 #e0e0e0
+#define base06 #f5f5f5
+#define base07 #ffffff
+#define base08 #fb0120
+#define base09 #fc6d24
+#define base0A #fda331
+#define base0B #a1c659
+#define base0C #76c7b7
+#define base0D #6fb3d2
+#define base0E #d381c3
+#define base0F #be643c
+
+*.color0:	base00
+*.color1:	base08
+*.color2:	base0B
+*.color3:	base0A
+*.color4:	base0D
+*.color5:	base0E
+*.color6:	base0C
+*.color7:	base05
+
+*.color8:	base03
+*.color9:	base09
+*.color10:	base01
+*.color11:	base02
+*.color12:	base04
+*.color13:	base06
+*.color14:	base0F
+*.color15:	base07
+
+rofi.color-enabled: true
+rofi.color-window: #424242, #424242, #000000
+rofi.color-normal: #424242, #f0f0f0, #525252, #a0a0a0, #151515
+rofi.color-active: #424242, #f0f0f0, #424242, #268bd2, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3

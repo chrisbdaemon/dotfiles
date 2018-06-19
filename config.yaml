@@ -1,0 +1,28 @@
+config:
+  backup: true
+  banner: true
+  create: true
+  dotpath: dotfiles
+  keepdot: false
+  longkey: false
+dotfiles:
+  f_init.el:
+    dst: ~/.emacs.d/init.el
+    src: emacs.d/init.el
+  f_tmux.conf:
+    dst: ~/.tmux.conf
+    src: tmux.conf
+  f_vimrc:
+    dst: ~/.vimrc
+    src: vimrc
+  f_xresources:
+    dst: ~/.Xresources
+    src: Xresources
+profiles:
+  abu:
+    dotfiles:
+    - f_init.el
+    - f_xresources
+    - f_vimrc
+    - f_tmux.conf
+    - f_gitconfig
