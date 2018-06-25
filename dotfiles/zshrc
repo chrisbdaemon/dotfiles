@@ -1,0 +1,104 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+$HOME/.config/base16-shell/scripts/base16-classic-dark.sh
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+emacs_cmd='emacs --no-window-system'
+
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+LSCOLORS="exfxcxdxbxegedabagacad"
+
+if [ -x "/usr/bin/vim" ]; then
+	export EDITOR=$emacs_cmd
+	export SVN_EDITOR=$emacs_cmd
+fi
+
+export EDITOR=vim
+
+export VISUAL=$EDITOR
+
+if [ -e "$HOME/.zshrc_local" ]; then
+	source $HOME/.zshrc_local
+fi
+
+if [ -x "$HOME/.dotfiles/dotdrop.sh" ]; then
+	alias dotdrop="$HOME/.dotfiles/dotdrop.sh"
+fi
+
+alias emacs=$emacs_cmd
+alias cemacs='find . -name "\#*\#" -exec rm -rf {} \; && find . -name "*\~" -exec rm -rf {} \;'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch -a '
+alias gba='git checkout -b '
+alias gbd='git branch -D '
+alias gc='git commit'
+alias gd='git diff'
+alias gh='git hist '
+alias gco='git checkout '
+alias gcom='git checkout master'
+alias gcod='git checkout development'
+alias gai='git add -i '
+
+alias cdiff="diff --old-group-format=$'\e[0;31m%<\e[0m' \
+                  --new-group-format=$'\e[0;31m%>\e[0m' \
+                  --unchanged-group-format=$'\e[0;32m%=\e[0m'"
+
+if [ -d "$HOME/Code/Go" ]; then
+	export GOPATH="$HOME/Code/Go"
+	export PATH="$PATH:$GOPATH/bin"
+	alias gtcov="go test -coverprofile=coverage.out&&go tool cover -html=coverage.out&&rm -rf coverage.out"
+
+	if [ -d "/usr/local/go" ]; then
+		export GOROOT="/usr/local/go"
+	elif [ -d "/usr/lib/go" ]; then
+		export GOROOT="/usr/lib/go"
+	else
+		export GOROOT="/usr"
+	fi
+fi
+
+export PYTHONDONTWRITEBYTECODE=1
+
+if [ -d "/usr/lib/jvm/java-8-openjdk" ]; then
+	export JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
+fi
+
+## History
+HISTFILE=$HOME/.zhistory
+setopt APPEND_HISTORY
+HISTSIZE=5000
+SAVEHIST=10000
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt EXTENDED_HISTORY
+
+if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
+	export WORKON_HOME="$HOME/.virtualenv"
+	source /usr/local/bin/virtualenvwrapper.sh
+elif [ -f "/usr/bin/virtualenvwrapper.sh" ]; then
+	export WORKON_HOME="$HOME/.virtualenv"
+	source /usr/bin/virtualenvwrapper.sh
+fi
+
+if [ $TERM = "xterm" ] ; then
+	if [ $COLORTERM -a $COLORTERM = "gnome-terminal" ] ; then
+		export TERM="xterm-256color"
+	fi
+	if [ -e /usr/share/terminfo/x/xterm-256color ] && [ "$COLORTERM" = "xfce4-terminal" ]; then
+		export TERM=xterm-256color
+	fi
+fi
+
+pbdo () { for c in "$@"; do printf "\n$ %s\n" "$c" && eval "$c"; done 2>&1 | tee >(curl -F c=@- "https://ptpb.pw/?u=1") ; }

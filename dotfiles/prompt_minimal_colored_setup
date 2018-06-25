@@ -1,0 +1,54 @@
+#
+# A monochrome theme that displays basic information.
+#
+# Authors:
+#   Brian Tse <briankftse@gmail.com>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+# Screenshots:
+#   http://i.imgur.com/zLZNK.png
+#
+
+function +vi-git_status {
+  # Check for untracked files or updated submodules since vcs_info does not.
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    hook_com[unstaged]='*'
+  fi
+}
+
+function prompt_minimal_colored_precmd {
+  _prompt_pwd="${PWD/#$HOME/~}"
+  vcs_info
+}
+
+function prompt_minimal_colored_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add hook for calling vcs_info before each command.
+  add-zsh-hook precmd prompt_minimal_colored_precmd
+
+  # Set vcs_info parameters.
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' check-for-changes true
+
+  zstyle ':vcs_info:git*' actionformats "%b"
+  zstyle ':vcs_info:*' actionformats ' %F{yellow}<%b%c%u>%f'
+  zstyle ':vcs_info:*' unstagedstr '*'
+  zstyle ':vcs_info:*' stagedstr ''
+  zstyle ':vcs_info:*' formats ' %F{yellow}<%b%c%u>%f'
+  zstyle ':vcs_info:git*+set-message:*' hooks git_status
+
+  # Define prompts.
+  PROMPT='%m %F{magenta}%B::%b%f %F{green}${_prompt_pwd}%f${vcs_info_msg_0_} %B%F{blue}»%f%b '
+  RPROMPT=''
+}
+
+#${fg_bold[$CARETCOLOR]}%}»%{${reset_color}%}
+
+prompt_minimal_colored_setup "$@"

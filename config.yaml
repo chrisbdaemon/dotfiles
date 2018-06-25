@@ -1,3 +1,7 @@
+actions:
+  pre:
+    submodules: git submodule init && git submodule update --recursive
+    zprezto: cp ~/.dotfiles/dotfiles/prompt_minimal_colored_setup ~/.dotfiles/dotfiles/zprezto/modules/prompt/functions
 config:
   backup: true
   banner: true
@@ -6,9 +10,36 @@ config:
   keepdot: false
   longkey: false
 dotfiles:
-  f_init.el:
+  d_zprezto:
+    dst: ~/.zprezto
+    src: zprezto
+    actions:
+    - submodules
+    - zprezto
+  f_agignore:
+    dst: ~/.agignore
+    src: agignore
+  f_bashrc:
+    dst: ~/.bashrc
+    src: bashrc
+  f_config:
+    dst: ~/.config/i3/config
+    src: config/i3/config
+  f_emacs_init.el:
     dst: ~/.emacs.d/init.el
     src: emacs.d/init.el
+  f_gdbinit:
+    dst: ~/.gdbinit
+    src: gdbinit
+  f_gitconfig:
+    dst: ~/.gitconfig
+    src: gitconfig
+  f_gitignore:
+    dst: ~/.gitignore
+    src: gitignore
+  f_polybar_config:
+    dst: ~/.config/polybar/config
+    src: config/polybar/config
   f_tmux.conf:
     dst: ~/.tmux.conf
     src: tmux.conf
@@ -18,11 +49,39 @@ dotfiles:
   f_xresources:
     dst: ~/.Xresources
     src: Xresources
+  f_zpreztorc:
+    dst: ~/.zpreztorc
+    src: zpreztorc
+  f_zshrc:
+    dst: ~/.zshrc
+    src: zshrc
 profiles:
-  abu:
+  desktop:
     dotfiles:
-    - f_init.el
+    - f_config
+    - f_polybar_config
+    - f_emacs_init.el
     - f_xresources
     - f_vimrc
     - f_tmux.conf
+    - f_agignore
+    - f_bashrc
+    - f_gdbinit
     - f_gitconfig
+    - f_gitignore
+    - f_zpreztorc
+    - f_zshrc
+    - d_zprezto
+  headless:
+    dotfiles:
+    - f_emacs_init.el
+    - f_vimrc
+    - f_tmux.conf
+    - f_agignore
+    - f_bashrc
+    - f_gdbinit
+    - f_gitconfig
+    - f_gitignore
+    - f_zpreztorc
+    - f_zshrc
+    - d_zprezto

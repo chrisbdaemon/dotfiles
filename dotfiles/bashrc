@@ -1,0 +1,28 @@
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# Bring in any local config
+if [ -f $HOME/.bashrc_local ]; then
+	. $HOME/.bashrc_local
+fi
+
+alias vi=vim
+
+# The usual git aliases
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch -a '
+alias gba='git checkout -b '
+alias gbd='git branch -D '
+alias gc='git commit'
+alias gd='git diff'
+alias gh='git hist '
+alias gco='git checkout '
+alias gcom='git checkout master'
+alias gcod='git checkout development'
+alias gai='git add -i '
+
+export PS1='\h \[\e[1;35m\]::\[\e[m\] \[\e[1;32m\]\w\[\e[m\] \[\e[1;34m\]»\[\e[m\] \[\e[1;37m\]'
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'

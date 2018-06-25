@@ -1,0 +1,97 @@
+[bar/mybar]
+width = 100%
+height = 24
+background = #00181818
+foreground = #ffd8d8d8
+padding-right = 2
+module-margin = 1
+font-0 = Hack:size=10:weight=medium;3
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = "Wuncon Siji:pixelsize=10;1"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-5 = "Font Awesome 5 Brands:pixelsize=12;3"
+fixed-center = true
+modules-left = i3
+modules-center = dateTimeThing
+modules-right = battery wired-network volume 
+line-size = 1
+border-bottom-size = 2
+border-bottom-color = #cc585858
+tray-position=right
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+
+format-discharging = <ramp-capacity> <label-discharging>
+
+format-full-prefix = " "
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-framerate = 750
+
+[module/wired-network]
+type = internal/network
+interface = enp7s0
+interval = 3.0
+format-connected = <label-connected>
+format-disconnected =<label-disconnected>
+label-connected = %local_ip%
+label-connected-foreground = #ffa1b56c
+label-disconnected = disconnected
+label-disconnected-foreground = #ccab4642
+
+[module/i3]
+type = internal/i3
+index-sort = true
+enable-click = true
+label-focused = %index%
+label-focused-foreground = #ffd8d8d8
+label-unfocused-foreground = #ccd8d8d8
+label-focused-background = #cc585858
+label-focused-padding = 2
+label-unfocused = %index%
+label-unfocused-padding = 2
+label-urgent = %index%
+label-urgent-background = #ffab4642
+label-urgent-padding = 2
+label-visible = %index%
+label-visible-foreground = #444
+label-visible-padding = 2
+
+[module/dateTimeThing]
+type = internal/date
+date =%a %d %b, %I:%M %p
+format-foreground = #ffd8d8d8
+format = <label>
+
+[module/volume]
+type = internal/volume
+master-mixer= Master
+; headphone_control_numid = 19
+
+format-volume-foreground = #ffd8d8d8
+format-charging-foreground = #ffd8d8d8
+format-muted-foreground = #ffd8d8d8
+; format-volume-underline = #ffebcb8b
+; format-muted-underline = #cc241d
+
+label-volume = %percentage:3%%
+label-muted  =   0%
+
+
+[module/whitespace]
+type = custom/script
+exec= echo " "
+; vim:ft=dosini
