@@ -5,7 +5,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-$HOME/.config/base16-shell/scripts/base16-classic-dark.sh
+if [ -x "$HOME/.config/base16-shell/scripts/base16-classic-dark.sh" ]; then
+	$HOME/.config/base16-shell/scripts/base16-classic-dark.sh
+fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
