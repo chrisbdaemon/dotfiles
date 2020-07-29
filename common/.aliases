@@ -1,0 +1,10 @@
+alias ga="git add"
+alias gs="git status"
+alias gc="git commit"
+alias gai="git add --interactive"
+alias gd="git diff"
+alias gh="git hist"
+alias gf="git fetch origin && git fetch upstream"
+alias ghd="git histdiff"
+alias gca='git commit --amend --date="$(date)"'
+alias emacs="TERM=xterm-256color emacs -nw"
