@@ -31,25 +31,6 @@ if [[ -e "$HOME/.pyenv" ]]; then
 	eval "$(pyenv init -)"
 fi
 
-git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-git_status_flag() {
-	local git_status=$(git status 2> /dev/null)
-	if [[ ! $git_status =~ "working directory clean" ]]; then
-		echo -e '*'
-	fi
-}
-
-git_prompt_status() {
-	local branch=$(git_branch)
-	local flag=$(git_status_flag)
-	if [[ -n "$branch" ]]; then
-		echo "<$branch$flag> "
-	fi
-}
-
 PROMPT_START="\u\[$COLOR_BLUE\]@\[$COLOR_RESET\]\h "
 PROMPT_START+="\[$COLOR_MAGENTA\]::\[$COLOR_RESET\] "
 PROMPT_START+="\[$COLOR_GREEN\]\w\[$COLOR_RESET\]"

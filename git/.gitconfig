@@ -13,7 +13,7 @@
 	dump = cat-file -p
 	pullrb = pull --rebase
 [push]
-	default = matching
+	default = nothing
 [mergetool]
 	keepBackup = true
 [user]

@@ -69,8 +69,25 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(setq lsp-keymap-prefix "C-l")
+
 (use-package lsp-mode
-  :ensure t)
+  :ensure t
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+	 (c++-mode . lsp)
+	 )
+  :commands lsp)
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp
+  :config (push 'company-lsp company-backends))
+
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
 
 (use-package toml-mode
   :ensure t)
