@@ -17,26 +17,21 @@
 
 (setq column-number-mode t)
 
-; i hate smarttabs
+                                        ; i hate smarttabs
 (setq-default indent-tabs-mode nil)
 
-(use-package elpy
-  :ensure t
-  :config (elpy-enable))
-
-;;(setq-default c-basic-offset 2)
 (setq c-default-style "k&r" c-basic-offset 4)
 
 (use-package helm
   :ensure t
   :bind (("M-x" . helm-M-x)
-	 ("C-x C-f" . helm-find-files)
-	 ("C-x f" . helm-recentf)
-	 ("C-SPC" . helm-dabbrev)
-	 ("C-x b" . helm-buffers-list))
+         ("C-x C-f" . helm-find-files)
+         ("C-x f" . helm-recentf)
+         ("C-SPC" . helm-dabbrev)
+         ("C-x b" . helm-buffers-list))
   :config (progn
-	    (setq helm-buffers-fuzzy-matching t)
-	    (helm-mode 1)))
+            (setq helm-buffers-fuzzy-matching t)
+            (helm-mode 1)))
 
 (use-package projectile
   :ensure t
@@ -45,7 +40,7 @@
 (use-package helm-projectile
   :ensure t
   :bind (("C-c p f" . helm-projectile-find-file)
-	 ("C-c p s s" . helm-projectile-ag)))
+         ("C-c p s s" . helm-projectile-ag)))
 
 (use-package go-mode
   :ensure t
@@ -54,8 +49,8 @@
   (defun go-mode-hook ()
     (add-hook 'before-save-hook 'gofmt-before-save)
     (if (not (string-match "go" compile-command))
-	(set (make-local-variable 'compile-command)
-	     "go build -v && go test -v && go vet")))
+        (set (make-local-variable 'compile-command)
+             "go build -v && go test -v && go vet")))
   (add-hook 'go-mode-hook 'go-mode-hook))
 
 (use-package magit
@@ -73,9 +68,9 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-	 (c++-mode . lsp)
-	 )
+  :hook (
+         (c++-mode . lsp)
+         )
   :commands lsp)
 
 (use-package lsp-ui
@@ -88,23 +83,6 @@
   :config (push 'company-lsp company-backends))
 
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-
-(use-package toml-mode
-  :ensure t)
-
-(use-package rust-mode
-  :ensure t
-  :hook (rust-mode . lsp))
-
-(use-package cargo
-  :ensure t
-  :hook (rust-mode . cargo-minor-mode))
-
-(use-package flycheck-rust
-  :ensure t
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
-(add-hook 'go-mode-hook #'lsp-deferred)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
