@@ -16,6 +16,7 @@
 	default = nothing
 [mergetool]
 	keepBackup = true
-[user]
-	email = chrisbdaemon@gmail.com
-	name = chrisbdaemon
+[pull]
+	ff = only
+[include]
+	path = ~/.gitconfig_local
