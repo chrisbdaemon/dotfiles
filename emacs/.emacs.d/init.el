@@ -2,6 +2,9 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
+(setq load-path (cons (expand-file-name "~/.emacs.d/lisp") load-path))
+(require 'cmake-mode)
+
 (require 'evil)
 (evil-mode 1)
 
@@ -81,6 +84,12 @@
   :config (push 'company-lsp company-backends))
 
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
+
+(use-package go-mode
+  :ensure t
+  :hook ((go-mode . lsp-deferred)
+         (before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
 
 ;; Do not set the background color
 (defun on-frame-open (frame)
