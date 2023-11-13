@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+DOTFILES=$HOME/.dotfiles
+
+function bstow_create_links() {
+	PKG=$1
+
+	for FILE in $(find $DOTFILES/$PKG -type f); do
+		# get dir relative to dotfiles
+		DIR=$(dirname $FILE)
+		DIR=${DIR#"$DOTFILES/$PKG/"}
+		DIR=${DIR#"$DOTFILES/$PKG"}
+
+		if [[ -n "$DIR" ]]; then
+			mkdir -p $HOME/$DIR
+		fi
+
+		BASEFILE=$(basename $FILE)
+
+		DST=$HOME/$DIR/$BASEFILE
+		DST=$(echo "$DST" | sed s#//*#/#g) # remove instances of '//'
+
+		SRC=$DOTFILES/$PKG/$DIR/$BASEFILE
+		SRC=$(echo "$SRC" | sed s#//*#/#g)
+
+		if [[ -e "$DST" ]]; then
+			if [[ -L "$DST" ]]; then
+				echo "INFO: $DST exists and is a link"
+			else
+				echo "WARNING: $DST exists and is not a link"
+			fi
+		else
+			ln -sv $SRC $DST
+		fi
+	done
+}
+
+if [[ "$#" -lt 1 ]]; then
+	echo -e "Usage: $0 <pkg1> <pkg2> ..."
+	exit 1
+fi
+
+for PKG in $@; do
+	bstow_create_links $PKG
+done
